@@ -1,6 +1,6 @@
 <?php 
 	header("Content-Type: text/html; charset=utf-8");
-	include("connMysql.php");
+	include("connMysql.php");//引入伺服器連線及識別碼檔(連線引入檔)
 	$seldb = @mysqli_select_db($db_link, "class");
 	if (!$seldb) {
 		die("資料庫選擇失敗！");
