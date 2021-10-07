@@ -3,8 +3,8 @@
     $b="12345";
     $typeA=justifyType(gettype($a));//呼叫函數justifyType
     $typeB=justifyType(gettype($b));    
-    echo "變數a的資料型態為:{$typeA}、內容為:{$a}<br>";
-    echo "變數b的資料型態為:{$typeB}、內容為:{$b}<br>";
+    echo "變數a的資料型態為:{$typeA}(".gettype($a).")、內容為:{$a}<br>";
+    echo "變數b的資料型態為:{$typeB}(".gettype($b).")、內容為:{$b}<br>";
     if($a!==$b){
         echo "變數a及變數b不完全相等";
     }else{
