@@ -1,13 +1,31 @@
 <?php
-    $cWeek="Sunday";
-    switch ($cWeek){
-        case "Sunday":
-            echo "星期日";
+    $dataType="double";
+    switch ($dataType){
+        case "Integer":
+            echo "整數";
             break;
-        case "Monday":
-            echo "星期一";
-            break;    
+        case "double":
+            echo "浮點數";
+            break;
+        case "boolean":
+            echo "布林值";
+            break;
+        case "string":
+            echo "字串";
+            break;
+        case "array":
+            echo "陣列";
+            break;
+        case "object":
+            echo "物件";
+            break;        
+        case "NULL":
+            echo "NULL";
+            break;
+        case "unknown type":
+            echo "未知型態";
+            break;
         default:
-            echo "不是星期資料";        
+            echo "資料型態有誤";        
     }
 ?>
