@@ -17,10 +17,12 @@
 	header("Content-Type: text/html; charset=utf-8");
 	include("connMysql.php");
 	$seldb = @mysqli_select_db($db_link, "class");
-	if (!$seldb) die("資料庫選擇失敗！");
-	$sql_query = "SELECT * FROM students";//查詢(搜尋)student資料表
+	if (!$seldb) die("資料庫選擇失敗！");	
+    $sql_query = "SELECT * FROM students";//查詢(搜尋)student資料表
 	$result = mysqli_query($db_link, $sql_query);//取出資料	
 	echo "<div class='col-8 offset-2'>";
+        //echo "<h3>全班共有:".mysqli_num_rows($result)."人</h3>";
+        echo "<div id='countSexDiv'>ABC</div>";
 		echo "<table class='table table-striped'>";
 			echo "<thead>";
 				echo "<th>編號</th>"."<th>姓名</th>"."<th>性別</th>"."<th>出生日期</th>"."<th>電子信箱</th>"."<th>聯絡電話</th>"."<th>住址</th>"."<th>身高</th>"."<th>體重</th>";
@@ -32,19 +34,29 @@
 					echo "<td>".$value."</td>";
 					if(($item==2) && ($value=='M')){
 						$countSexM++;
-						//$countSexM+=1;$countSexM = $countSexM + 1
+                        //$countSexM+=1;$countSexM = $countSexM + 1
 					}					
 				}
 				echo "</tr>";
 			}
 		echo "</table>";
-		echo "<h3>全班共有:".mysqli_num_rows($result)."人</h3>";
-		echo "<br/>男生有:{$countSexM}人、女生有:".(mysqli_num_rows($result)-$countSexM)."人";		
+        echo "<div id='showDiv'>ABC</div>";
+		/*echo "<h3>全班共有:".mysqli_num_rows($result)."人</h3>";
+		echo "<br/>男生有:{$countSexM}人、女生有:".(mysqli_num_rows($result)-$countSexM)."人";*/
 	echo "</div>";
 	?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script>
+        var total = '<?=mysqli_num_rows($result)?>';
+        var countM = '<?=$countSexM?>';
+        var countF = (total-countM);
+        $('#countSexDiv').text('全班共有:'+total+'人;男生:'+countM+'人'+'、女生:'+countF+'人');
+        $('#showDiv').text('全班共有:'+total+'人;男生:'+countM+'人'+'、女生:'+countF+'人');
+        $("#countSexDiv").css({"font-size":"150%","text-align":"center","line-height":"300%"});
+        $("#showDiv").css({"font-size":"120%","text-align":"right","color":"#990036","font-weight":"bold"});
+    </script>
 </body>
 
 </html>
