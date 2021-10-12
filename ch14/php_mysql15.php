@@ -4,7 +4,7 @@
 	$sql_query = "SELECT * FROM students";
 	$result = $db_link->query($sql_query);	
 	
-	while($row_result=$result->fetch_assoc()){
+	while($row_result=$result->fetch_assoc()){//fetch_assoc-->使用文字索引
 		foreach($row_result as $item=>$value){
 			echo $item."=".$value."<br>";
 		}

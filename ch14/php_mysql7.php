@@ -5,7 +5,7 @@
 	if (!$seldb) die("資料庫選擇失敗！");
 	$sql_query = "SELECT * FROM students";
 	$result = mysqli_query($db_link, $sql_query);	
-	while($row_result=mysqli_fetch_assoc($result)){
+	while($row_result=mysqli_fetch_assoc($result)){//mysqli的寫法
 		foreach($row_result as $item=>$value){
 			echo $item."=".$value."<br />";
 		}
