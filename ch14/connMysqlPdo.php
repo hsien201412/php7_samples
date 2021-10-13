@@ -1,7 +1,7 @@
 <?php
 	header("Content-Type: text/html; charset=utf-8");
 	//資料庫主機設定
-	$db_host = "localhost:3308";
+	$db_host = "localhost";
 	$db_username = "root";
 	$db_password = "1234";
 	$db_name = "class";
