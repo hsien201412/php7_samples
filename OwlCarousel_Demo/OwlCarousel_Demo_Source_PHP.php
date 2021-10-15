@@ -3,7 +3,8 @@
 <?php
 	header("Content-Type: text/html; charset=utf-8");
     include("connMysqlObj.php");
-    $sql_query = "SELECT image_name FROM image WHERE images_id >= 10";
+    $sql_query = "SELECT * FROM image WHERE images_id >= 9";
+    //$sql_query = "SELECT image_name FROM image WHERE images_id >= 9";
     $result = $db_link->query($sql_query);
 ?>
 <head>
@@ -31,11 +32,28 @@
     <div class="container-fluid">
         <div class="owl-carousel owl-theme">
             <?php
+                /*
                 while($row_result=$result->fetch_row()){
                     foreach($row_result as $value){                        
                         echo '<div class="item"><img class="img-fluid" src="img/'.$value.'.jpg"></div>';
                     }                    
                 }
+                */
+                while($row_result = $result->fetch_assoc()){
+                    echo '<div class="item"><img src="img/'.$row_result["image_name"].'.jpg" class="item img-fluid"></div>';
+                }
+                /*
+                while($row_result = $result->fetch_row()){
+                    echo '<div class="item"><img src="img/'.$row_result[1].'.jpg" class="item img-fluid"></div>';
+                }
+
+                while($row_result = $result->fetch_array()){
+                    echo '<div class="item"><img src="img/'.$row_result["image_name"].'.jpg" class="item img-fluid"></div>';
+                }
+                while($row_result = $result->fetch_object()){
+                    echo '<div class="item"><img src="img/'.$row_result->image_name.'.jpg" class="item img-fluid"></div>';
+                }
+                */
             ?>            
         </div>
     </div>

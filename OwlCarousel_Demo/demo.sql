@@ -36,14 +36,21 @@ CREATE TABLE `image` (
 --
 
 INSERT INTO `image` (`images_id`, `image_name`) VALUES
-(1, 'owl1.jpg'),
-(2, 'owl2.jpg'),
-(3, 'owl3.jpg'),
-(4, 'owl4.jpg'),
-(5, 'owl5.jpg'),
-(6, 'owl6.jpg'),
-(7, 'owl7.jpg'),
-(8, 'owl8.jpg');
+(1, 'owl1'),
+(2, 'owl2'),
+(3, 'owl3'),
+(4, 'owl4'),
+(5, 'owl5'),
+(6, 'owl6'),
+(7, 'owl7'),
+(8, 'owl8'),
+(9, 'fullimage1'),
+(10, 'fullimage2'),
+(11, 'fullimage3'),
+(12, 'fullimage4'),
+(13, 'fullimage5'),
+(14, 'fullimage6'),
+(15, 'fullimage7');
 
 --
 -- 已匯出資料表的索引
