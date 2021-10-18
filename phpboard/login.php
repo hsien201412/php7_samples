@@ -15,16 +15,29 @@ if(!isset($_SESSION["loginMember"]) || ($_SESSION["loginMember"]=="")){
 		$db_link->close();
 		//比對帳號密碼，若登入成功則進往管理界面，否則就退回主畫面。
 		if(($username==$_POST["username"]) && ($passwd==$_POST["passwd"])){
+      //比對所輸入的資料與資料庫中取出的資料比較
 			$_SESSION["loginMember"]=$username;
+      //將從資料庫中取出的帳號放到$_SESSION["loginMember"]
 			header("Location: admin.php");
+      //header前往輸出轉向-->登入成功前往admin.php
 		}else{
 			header("Location: index.php");
+      //登入失敗前往index.php
 		}
 	}
 }else{
 	//若已經有登入Session值則前往管理界面
 	header("Location: admin.php");
 }
+/*
+while($row_result=mysqli_fetch_row($result)){
+  foreach($row_result as $key=>$value){
+    $personalRecord[$rowNum][$key]=$value;
+  }
+  $rowNum++;
+}
+*/
+
 ?>
 <html>
 <head>
