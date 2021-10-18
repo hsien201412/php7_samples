@@ -2,7 +2,7 @@
 	include("connMysqlObj.php");
 	
 	//預設每頁筆數
-	$pageRow_records = 3;
+	$pageRow_records = 5;
 	//預設頁數
 	$num_pages = 1;
 	//若已經有翻頁，將頁數更新
@@ -22,7 +22,7 @@
 	//計算總筆數
 	$total_records = $all_result->num_rows;
 	//計算總頁數=(總筆數/每頁筆數)後無條件進位。
-	$total_pages = ceil($total_records/$pageRow_records);
+	$total_pages = ceil($total_records/$pageRow_records);//ceil無條件進位
 ?>
 <html>
 <head>
@@ -79,7 +79,7 @@
   	  頁數：
   	  <?php
   	  for($i=1;$i<=$total_pages;$i++){
-  	  	  if($i==$num_pages){
+  	  	  if($i==$num_pages){//如果$i的值等於目前所在頁數即不做超連結
   	  	  	  echo $i." ";
   	  	  }else{
   	  	      echo "<a href=\"data_page.php?page={$i}\">{$i}</a> ";

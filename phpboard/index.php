@@ -96,7 +96,21 @@ $total_pages = ceil($total_records/$pageRow_records);
                 <?php if ($num_pages < $total_pages) { // 若不是最後一頁則顯示 ?>
                 <a href="?page=<?php echo $num_pages+1;?>">下一頁</a> | <a href="?page=<?php echo $total_pages;?>">最末頁</a>
                 <?php }?>
-              </p></td>
+              </p></td>              
+          </tr>
+          <tr>
+            <td colspan="2" align="right" valign="middle">
+            頁數：
+  	  <?php
+  	  for($i=1;$i<=$total_pages;$i++){
+  	  	  if($i==$num_pages){//如果$i的值等於目前所在頁數即不做超連結
+  	  	  	  echo $i." ";
+  	  	  }else{
+  	  	      echo "<a href=\"index.php?page={$i}\">{$i}</a> ";
+  	  	  }
+  	  }
+  	  ?>
+            </td>
           </tr>
         </table>
       </div></td>
