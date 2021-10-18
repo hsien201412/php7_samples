@@ -1,27 +1,38 @@
 <?php 
 require_once("connMysql.php");
 //預設每頁筆數
-$pageRow_records = 5;
-//預設頁數
-$num_pages = 1;
+$pageRow_records = 5;//設定每頁顯示5筆資料
+//預設目前所在頁數
+$num_pages = 1;//一開始設定在第一頁
 //若已經有翻頁，將頁數更新
-if (isset($_GET['page'])) {
-  $num_pages = $_GET['page'];
+if (isset($_GET['page'])) {//網址列傳遞過來參數page則執行下列程式
+  $num_pages = $_GET['page'];//將從網址列參數所得的值指定到$num_page
 }
 //本頁開始記錄筆數 = (頁數-1)*每頁記錄筆數
+/*設定一頁顯示5筆資料，若第一頁，則顯示資料編號0、1、2、3、4
+，若在第二頁，則顯示資料編號5、6、7、8、9
+所以代表了第N頁資料顯示的資料編號開頭為(N-1)*每頁資料筆數
+*/
 $startRow_records = ($num_pages -1) * $pageRow_records;
 //未加限制顯示筆數的SQL敘述句
 $query_RecBoard = "SELECT * FROM board ORDER BY boardtime DESC";
 //加上限制顯示筆數的SQL敘述句，由本頁開始記錄筆數開始，每頁顯示預設筆數
 $query_limit_RecBoard = $query_RecBoard." LIMIT {$startRow_records}, {$pageRow_records}";
+/*
+LIMIT為指定編號開始抓取N數資料
+參考資料 https://dotblogs.com.tw/invercent914/2014/04/03/144599
+*/
 //以加上限制顯示筆數的SQL敘述句查詢資料到 $RecBoard 中
 $RecBoard = $db_link->query($query_limit_RecBoard);
+//指行SQL指令的結果放到$RecBoard
 //以未加上限制顯示筆數的SQL敘述句查詢資料到 $all_RecBoard 中
 $all_RecBoard = $db_link->query($query_RecBoard);
+//指行SQL指令的結果放到$all_RecBoard
 //計算總筆數
 $total_records = $all_RecBoard->num_rows;
 //計算總頁數=(總筆數/每頁筆數)後無條件進位。
 $total_pages = ceil($total_records/$pageRow_records);
+//ceil無條件進位
 ?>
 <html>
 <head>
