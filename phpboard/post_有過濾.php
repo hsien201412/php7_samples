@@ -1,17 +1,37 @@
 <?php 
+function GetSQLValueString($theValue, $theType) {
+  switch ($theType) {
+    case "string":
+      $theValue = ($theValue != "") ? filter_var($theValue, FILTER_SANITIZE_MAGIC_QUOTES) : "";
+      /*
+      FILTER_SANITIZE_MAGIC_QUOTES過濾
+      參考資料https://campus-xoops.tn.edu.tw/modules/tad_book3/html.php?tbdsn=708
+      */
+      break;
+    case "int":
+      $theValue = ($theValue != "") ? filter_var($theValue, FILTER_SANITIZE_NUMBER_INT) : "";
+      break;
+    case "email":
+      $theValue = ($theValue != "") ? filter_var($theValue, FILTER_VALIDATE_EMAIL) : "";
+      break;
+    case "url":
+      $theValue = ($theValue != "") ? filter_var($theValue, FILTER_VALIDATE_URL) : "";
+      break;      
+  }
+  return $theValue;
+}
+
 if(isset($_POST["action"])&&($_POST["action"]=="add")){
-  //按下表單中的按鈕才會出現action且值為add
 	require_once("connMysql.php");	
 	$query_insert = "INSERT INTO board (boardname ,boardsex ,boardsubject ,boardtime ,boardmail ,boardweb ,boardcontent) VALUES (?, ?, ?, NOW(), ?, ?, ?)";
-  //在預備語法中新增資料的SQL指令，NOW()預設抓取系統時間
 	$stmt = $db_link->prepare($query_insert);
-	$stmt->bind_param("ssssss",$boardname,$boardsex,$boardsubject,$boardmail,$boardweb,$boardcontent);
-  $boardname=$_POST["boardname"];
-  $boardsex=$_POST["boardsex"];
-  $boardsubject=$_POST["boardsubject"];
-  $boardmail=$_POST["boardmail"];
-  $boardweb=$_POST["boardweb"];
-  $boardcontent=$_POST["boardcontent"];
+	$stmt->bind_param("ssssss",
+		GetSQLValueString($_POST["boardname"], "string"),
+		GetSQLValueString($_POST["boardsex"], "string"),
+		GetSQLValueString($_POST["boardsubject"], "string"),
+		GetSQLValueString($_POST["boardmail"], "email"),
+		GetSQLValueString($_POST["boardweb"], "url"),
+		GetSQLValueString($_POST["boardcontent"], "string"));
 	$stmt->execute();
 	$stmt->close();
 	$db_link->close();
