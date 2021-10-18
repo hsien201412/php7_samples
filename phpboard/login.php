@@ -1,7 +1,8 @@
 <?php
-session_start();
+session_start();//開始啟用SESSION
 //如果沒有登入Session值或是Session值為空則執行登入動作
 if(!isset($_SESSION["loginMember"]) || ($_SESSION["loginMember"]=="")){
+  //isset(變數)-->判斷變數是否存在--->若存在值為1反之為0
 	if(isset($_POST["username"]) && isset($_POST["passwd"])){
 		require_once("connMysql.php");		
 		//選取儲存帳號密碼的資料表

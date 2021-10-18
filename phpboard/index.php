@@ -106,7 +106,8 @@ $total_pages = ceil($total_records/$pageRow_records);
   	  	  if($i==$num_pages){//如果$i的值等於目前所在頁數即不做超連結
   	  	  	  echo $i." ";
   	  	  }else{
-  	  	      echo "<a href=\"index.php?page={$i}\">{$i}</a> ";
+  	  	      echo "<a href='index.php?page=".$i."'>{$i}</a>";
+              //echo "<a href=\"index.php?page={$i}\">{$i}</a> ";
   	  	  }
   	  }
   	  ?>
